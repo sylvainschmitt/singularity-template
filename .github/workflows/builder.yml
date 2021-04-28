@@ -49,20 +49,20 @@ jobs:
             repo=$(echo "${GITHUB_REPOSITORY/\//-}")
 
             # For each Singularity* container, build based on the prefix (tag) 
-            for recipe in $(ls Singularity*); do
+            for recipe in $(ls *.sif); do
                 echo "Building $recipe"
-                tag=$(echo "${recipe/Singularity\./}")
-                $(ls Singularity*)
+                tag=$(echo "${recipe/\.sif/}")
                 # If we find empty, use latest
                 if [ "$tag" == "Singularity" ]; then
                     tag=latest
                 fi
-                release=$(cat VERSION)
+                release="_$(cat VERSION)"
                 # Build the container and name by tag
                 echo "Tag is $tag"
                 echo "Version is $release"
                 # container="$repo:$tag" # renaming
-                container="$tag_$release$"
+                container="$tag$release"
+                echo "Container is $container"
                 singularity build --fakeroot container "$recipe"
                 if [ "$?" == "0" ]; then
                     echo "Successfully built container $container."                
