@@ -19,7 +19,7 @@ jobs:
             repo=$(echo "${GITHUB_REPOSITORY/\//-}")
 
             # For each Singularity* container, build based on the prefix (tag) 
-            for recipe in $(ls Singularity*); do
+            for recipe in $(ls *.sif); do
                 echo "Building $recipe"
                 tag=$(echo "${recipe/\.sif/}")
                 # If we find empty, use latest
