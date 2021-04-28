@@ -22,7 +22,7 @@ jobs:
             for recipe in $(ls Singularity*); do
                 echo "Building $recipe"
                 tag=$(echo "${recipe/Singularity\./}")
-                tag="$(tag%.*)"
+                tag=$(echo "$(tag%.*)")
                 # If we find empty, use latest
                 if [ "$tag" == "Singularity" ]; then
                     tag=latest
