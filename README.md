@@ -11,7 +11,7 @@ Template Version: X.X.X
 
 \[URL\]
 
-Singularity container based on the recipe: Singularity.template.def
+Singularity container based on the recipe: Singularity.def
 
 Package installation using Miniconda3 V4.7.12
 
