@@ -52,17 +52,21 @@ jobs:
             for recipe in $(ls Singularity*); do
                 echo "Building $recipe"
                 tag=$(echo "${recipe/Singularity\./}")
+                $(ls Singularity*)
                 # If we find empty, use latest
                 if [ "$tag" == "Singularity" ]; then
                     tag=latest
                 fi
+                release=$(cat VERSION)
                 # Build the container and name by tag
-                echo "Tag is $tag."
-                container="$repo:$tag.sif"
-                singularity build --fakeroot container.sif "$recipe"
+                echo "Tag is $tag"
+                echo "Version is $release"
+                # container="$repo:$tag" # renaming
+                container="$tag_$release$"
+                singularity build --fakeroot container "$recipe"
                 if [ "$?" == "0" ]; then
                     echo "Successfully built container $container."                
-                    mv container.sif "$container"
+                    mv container "$container"
                 else
                     echo "There was an issue building $container."          
                 fi

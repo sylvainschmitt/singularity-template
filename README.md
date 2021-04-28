@@ -30,8 +30,11 @@ sudo singularity build Singularity.template.sif Template_0.0.1
 **pull**:
 
 ``` bash
-singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/singularityhub-singularity-deploy.latest.sif
+singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/singularityhub-singularity-template.latest.sif
 ```
+
+https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/sylvainschmitt-singularity-template.template.sif.sif
+https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/Singularity.template.sif
 
 **snakemake**:
 
