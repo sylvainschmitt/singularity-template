@@ -21,8 +21,7 @@ jobs:
             # For each Singularity* container, build based on the prefix (tag) 
             for recipe in $(ls Singularity*); do
                 echo "Building $recipe"
-                tag=$(echo "${recipe/Singularity\./}")
-                tag=$(echo "$(tag%.*)")
+                tag=$(echo "${recipe/\.sif/}")
                 # If we find empty, use latest
                 if [ "$tag" == "Singularity" ]; then
                     tag=latest
