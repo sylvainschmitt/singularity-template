@@ -43,13 +43,13 @@ sudo singularity build Singularity img.sif
 **pull**:
 
 ```{bash, echo=T, eval=F}
-singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/sylvainschmitt-singularity-template.latest.sif
+singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.4/sylvainschmitt-singularity-template.latest.sif
 ```
 
 **snakemake**:
 
 ```{python, echo=T, eval=F}
     singularity: 
-        "https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/sylvainschmitt-singularity-template.latest.sif"
+        "https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.4/sylvainschmitt-singularity-template.latest.sif"
 ```
 
