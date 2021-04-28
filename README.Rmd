@@ -26,7 +26,7 @@ Template Version: X.X.X
 
 [URL]
 
-Singularity container based on the recipe: Singularity.template.sif
+Singularity container based on the recipe: Singularity.template.def
 
 Package installation using Miniconda3 V4.7.12
 
@@ -37,19 +37,19 @@ Image singularity (V>=3.3) is automatically test and built and pushed on the reg
 **build**:
 
 ```{bash, echo=T, eval=F}
-sudo singularity build Singularity.template.sif Template_0.0.1
+sudo singularity build Singularity img.sif
 ```
 
 **pull**:
 
 ```{bash, echo=T, eval=F}
-singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/singularityhub-singularity-deploy.latest.sif
+singularity pull https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/sylvainschmitt-singularity-template.latest.sif
 ```
 
 **snakemake**:
 
 ```{python, echo=T, eval=F}
     singularity: 
-        "https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/singularityhub-singularity-deploy.latest.sif"
+        "https://github.com/sylvainschmitt/singularity-template/releases/download/0.0.1/sylvainschmitt-singularity-template.latest.sif"
 ```
 
