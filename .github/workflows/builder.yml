@@ -61,7 +61,8 @@ jobs:
                 echo "Tag is $tag"
                 echo "Version is $release"
                 # container="$repo:$tag" # renaming
-                container="$tag_$release$"
+                container="$tag:$release$"
+                echo "Container is $container"
                 singularity build --fakeroot container "$recipe"
                 if [ "$?" == "0" ]; then
                     echo "Successfully built container $container."                
