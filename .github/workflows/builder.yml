@@ -2,11 +2,8 @@ name: singularity-deploy
 
 on:
   push:
-    # This branch does not exist! You should update this to be your "production" branch
-    # and ensure that when you work on recipes you only merge to this branch when it's time to release
-    # You can also use another GitHub trigger entirely
     branches:
-      - "release"
+      - "main"
 
 jobs:
   release:
@@ -21,7 +18,6 @@ jobs:
             git fetch --tags
             latest_tag=$(git tag | tail -1)
             echo "latest_tag=$latest_tag" >> $GITHUB_ENV
-
       - name: Define Repository Name and Release Version
         run: |
             repo=$(echo "${GITHUB_REPOSITORY/\//-}")
@@ -42,31 +38,26 @@ jobs:
       - uses: eWaterCycle/setup-singularity@v6
         if: ${{ env.release_tag != env.latest_tag }}
         with:
-          singularity-version: 3.7.1
+          singularity-version: 3.6.4
       - name: Build the singularity container
         if: ${{ env.release_tag != env.latest_tag }}
         run: |
             repo=$(echo "${GITHUB_REPOSITORY/\//-}")
-
             # For each Singularity* container, build based on the prefix (tag) 
-            for recipe in $(ls *.sif); do
+            for recipe in $(ls Singularity*); do
                 echo "Building $recipe"
-                tag=$(echo "${recipe/\.sif/}")
+                tag=$(echo "${recipe/Singularity\./}")
                 # If we find empty, use latest
                 if [ "$tag" == "Singularity" ]; then
                     tag=latest
                 fi
-                release="_$(cat VERSION)"
                 # Build the container and name by tag
-                echo "Tag is $tag"
-                echo "Version is $release"
-                # container="$repo:$tag" # renaming
-                container="$tag$release"
-                echo "Container is $container"
-                singularity build --fakeroot container "$recipe"
+                echo "Tag is $tag."
+                container="$repo:$tag.sif"
+                singularity build --fakeroot container.sif Singularity
                 if [ "$?" == "0" ]; then
                     echo "Successfully built container $container."                
-                    mv container "$container"
+                    mv container.sif "$container"
                 else
                     echo "There was an issue building $container."          
                 fi
@@ -79,3 +70,4 @@ jobs:
           tag_name: ${{ env.release_tag }}
         run: |
           hub release edit $(find . -type f -name "*.sif" -printf "-a %p ") -m "" "$tag_name" 
+          
